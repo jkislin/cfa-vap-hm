@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 
 {
+  nixpkgs.config = {
+      allowUnfree = true;
+  };
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "gio";
@@ -19,6 +22,8 @@
   # environment.
   home.packages = [
     pkgs.git
+    pkgs.openvpn3
+    pkgs.google-chrome
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -65,6 +70,11 @@
     [includeif "gitdir:~/Documents/CDC/**"]
         path = "~/Documents/CDC/.gitconfig"
 
+    '';
+    ".bashrc".text = ''
+    if command -v tmux &> /dev/null && [ -n "PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+      exec tmux
+    fi
     '';
   };
 
