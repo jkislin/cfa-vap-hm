@@ -50,6 +50,7 @@
     jq
     tree
     gemini-cli
+    xclip
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -158,8 +159,8 @@
          set-option -ga terminal-overrides ",*256col*:Tc:RGB"
          set-window-option -g mode-keys vi
          bind -T copy-mode-vi v send -X begin-selection
-         bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"
-         bind P run-shell "tmux save-buffer /tmp/tmux-buffer && xclip -sel clipboard /tmp/tmux-buffer"
+         bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "xclip -i -sel clipboard" # Linux
+         set-option -g buffer-limit 102400 # Sets the buffer limit to 100 KB
          set-option -sg escape-time 10
          set-option -g default-terminal "screen-256color"
          bind c new-window -c "#{pane_current_path}"
