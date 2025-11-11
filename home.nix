@@ -134,6 +134,7 @@
     alias runlike="docker run --rm -v /var/run/docker.sock:/var/run/docker.sock assaflavie/runlike"
     alias runlike_latest='docker run --rm -v /var/run/docker.sock:/var/run/docker.sock assaflavie/runlike "$(docker ps -l -q)"'
     alias docker_logs_latest='docker logs "$(docker ps -aql)"'
+    alias keybindings='gsettings list-recursively | grep -i keybindings'
     '';
   };
 
